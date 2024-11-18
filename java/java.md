@@ -332,16 +332,149 @@ Wrapper：
 ![alt text](image-2.png)
 
 ---
-String:
-implement (Serializable可串行化 / Comparable / CharSequence)
-使用Unicode字符编码，一个字符占两个字节
-该类被final修饰，不能被继承
-有属性private final char value[ ] //value可以修改值，但不能修改该地址
+### java String
+```java
+public class Main{
+public static void main(String[] args) {
+    //test String
+    //String 类是不可改变的，所以你一旦创建了 String 对象，那它的值就无法改变了
+    //String 创建的字符串存储在公共池中，而 new 创建的字符串对象在堆上
+    String str1 = "asdasd";
+    String str2 = new String("asdjalsf");
+    System.out.println(str1.length());//no .size()
+    System.out.println(str1.concat(str2));//concat()
 
-
+    }
+}
+```
+string api:https://www.runoob.com/java/java-string.html
+String buffer:https://www.runoob.com/java/java-stringbuffer.html
 
 ---
 
-## Graphic user interface(GUI)
-why: to design a useable and nice interface frame for user
-https://blog.csdn.net/xiaoxianer321/article/details/120407071
+### java Character:
+```java
+class Main{
+public static void main(String[] args) {
+    Character ch = new Character('a');
+    System.out.println(ch);
+    //test isLetter()
+    System.out.println(Character.isLetter('a'));//output:true
+    System.out.println(Character.isLetter('5'));//output:false
+    //test isDigit
+    System.out.println(Character.isDigit('c'));//output:false
+    System.out.println(Character.isDigit('5'));//output:true
+    //test toUpperCase -- toLowerCase 
+    System.out.println(Character.toUpperCase('a'));
+    System.out.println(Character.toUpperCase('A'));
+    //test toString
+    System.out.println(Character.toString('a'));//返回一个表示指定 char 值的 String 对象。结果是长度为 1 的字符串，仅由指定的 char 组成
+    }
+}
+```
+
+---
+
+### 从键盘接收数据:
+
+```java
+import java.util.Scanner;
+//这是单行文本，如果只接收字符串的话则修改为scan.next(),判断条件改为scan.hasNext()
+public class Main {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        // 从键盘接收数据
+
+        // nextLine方式接收字符串
+        System.out.println("nextLine方式接收：");
+        // 判断是否还有输入
+        if (scan.hasNextLine()) {
+            String str2 = scan.nextLine();
+            System.out.println("输入的数据为：" + str2);
+        }
+        scan.close();
+    }
+}
+```
+
+```
+next():
+1、一定要读取到有效字符后才可以结束输入。
+2、对输入有效字符之前遇到的空白，next() 方法会自动将其去掉。
+3、只有输入有效字符后才将其后面输入的空白作为分隔符或者结束符。
+next() 不能得到带有空格的字符串。
+nextLine()：
+1、以Enter为结束符,也就是说 nextLine()方法返回的是输入回车之前的所有字符。
+2、可以获得空白。
+```
+
+---
+### polymorph
+```java
+Animal animal = new Dog();//编译类型为animal，运行类型为dog
+//左边为编译类型(在定义对象时就确定了无法改变)，右边为运行类型(可以改变)
+animal = new Cat();
+
+//向上转型 父类的引用指向了子类的对象
+//可以调用父类的可访问成员，但不能调用子类的特有成员
+//可以理解为向上转型的成员调用方法时先找子类中是否有该成员（如果父类中也有的话），再去考虑父类的成员 -> 与继承一样
+
+
+//向下转型:
+//子类类型 引用对象 = （子类类型)父类引用;
+Cat cat = (Cat)animal;//向下转型以后能够用cat的特有方法
+
+
+```
+>notice:向上转型(或者没转型)的属性看的是编译类型(也就是左边)
+>instance 判断看的是运行类型(也就是右边)
+
+### DynamicBinding
+方法调用时子方法如果调用参数则参数是当前访问类的属性
+
+```JAVA
+package learn.polymorph.dynamic_binding;
+class base{
+    public int i = 10;
+
+    public int getI() {
+        return i;
+    }
+
+    public void setI(int i) {
+        this.i = i;
+    }
+
+    public void show(){
+        System.out.println(i);
+        System.out.println(getI() + 100);
+    }
+}
+class sub extends base{
+    public int i = 20;
+
+
+    public int getI() {
+        return i;
+    }
+
+
+    public void setI(int i) {
+        this.i = i;
+    }
+
+//    public void show() {
+//        System.out.println(i);
+//        System.out.println(getI() + 200);
+//    }
+}
+
+public class test {
+    public static void main(String[] args) {
+        base b1 = new sub();
+        b1.show();//输出10  120
+    }
+
+}
+
+```
