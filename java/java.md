@@ -478,3 +478,13 @@ public class test {
 }
 
 ```
+
+
+```java
+    public class toString{
+        return getClass().getName() + "@" + Integer.toHexString(hashCode());
+    }//toString source code 一般需要重写
+
+```
+
+ debug过程看的是对象的运行类型(->)

@@ -1,0 +1,73 @@
+html{
+    background-color:rgba(40, 29, 29, 0.844);
+}
+
+body {
+    width: 600px;
+    margin: auto auto;
+    background-color: #5b3500;
+    padding: 0 20px 20px 20px;
+    border: 5px solid rgb(29, 22, 22);
+  }
+  
+
+  h1 {
+    text-align: center;
+    margin: 0 0;
+    padding: 20px 0;
+    color: #00539f;
+    text-shadow: 3px 3px 1px black;
+  }
+  
+
+p{
+    color:rgb(255, 255, 255)
+}
+
+img {
+    display: block;
+    margin: 0 auto;
+  }
+  
+
+/* 鼠标悬停时改变颜色 */
+a:hover {
+    color: rgb(17, 78, 40);
+}
+
+/* 第一个子元素设置样式 */
+p:first-child {
+    font-weight: bold;
+}
+
+/* 选择未被选中的复选框 */
+input[type="checkbox"]:not(:checked) {
+    opacity: 0.5;
+}
+
+
+
+/* 在段落开头插入内容 */
+/* p::before {
+    content: "Note: ";
+    font-weight: bold;
+    color: red;
+} */
+
+/* 在段落末尾插入内容
+p::after {                                                              
+    content: " (End of Paragraph)";
+    font-style: italic;
+} */
+
+/* 改变段落第一行的样式 */
+/* p::first-line {
+    font-size: larger;
+    color: blue;
+}
+
+/* 第一个字母的样式 */
+/* p::first-letter {
+    font-size: 2em;
+    color: green;
+} */
